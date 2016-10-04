@@ -1,1 +1,1 @@
-export render from './client/render.jsx';
+export render from './client/render';

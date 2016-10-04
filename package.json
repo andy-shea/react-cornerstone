@@ -21,8 +21,7 @@
   "scripts": {
     "prebuild": "rimraf lib",
     "build": "babel src -d lib",
-    "postbuild": "cp {package.json,README.md,LICENSE} lib/",
-    "prepublish": "npm run build"
+    "postbuild": "cp {package.json,README.md,LICENSE} lib/"
   },
   "devDependencies": {
     "babel-cli": "^6.16.0",
