@@ -2,7 +2,7 @@
   "name": "react-cornerstone",
   "description": "A starter kit to form the cornerstones of your React, Redux, universal app",
   "author": "Andy Shea <aa.shea@gmail.com>",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "license": "MIT",
   "main": "index.js",
   "repository": {
