@@ -8,13 +8,22 @@ function HttpError(code, message = '') {
 
 util.inherits(HttpError, Error);
 
-HttpError.badRequest = msg => new HttpError(400, msg || 'Bad request');
-HttpError.unauthorized = msg => new HttpError(401, msg || 'Unauthorized');
-HttpError.forbidden = msg => new HttpError(403, msg || 'Forbidden');
-HttpError.notFound = msg => new HttpError(404, msg || 'Not found');
-HttpError.methodNotAllowed = msg => new HttpError(405, msg || 'Method not allowed');
-HttpError.notAcceptable = msg => new HttpError(406, msg || 'Not acceptable');
-HttpError.tooManyRequests = msg => new HttpError(429, msg || 'Too many requests');
-HttpError.internalServerError = msg => new HttpError(500, msg || 'Internal server error');
+HttpError.BAD_REQUEST = 400;
+HttpError.UNAUTHORIZED = 401;
+HttpError.FORBIDDEN = 403;
+HttpError.NOT_FOUND = 404;
+HttpError.METHOD_NOT_ALLOWED = 405;
+HttpError.NOT_ACCEPTABLE = 406;
+HttpError.TOO_MANY_REQUESTS = 429;
+HttpError.INTERNAL_SERVER_ERROR = 500;
+
+HttpError.badRequest = msg => new HttpError(HttpError.BAD_REQUEST, msg || 'Bad request');
+HttpError.unauthorized = msg => new HttpError(HttpError.UNAUTHORIZED, msg || 'Unauthorized');
+HttpError.forbidden = msg => new HttpError(HttpError.FORBIDDEN, msg || 'Forbidden');
+HttpError.notFound = msg => new HttpError(HttpError.NOT_FOUND, msg || 'Not found');
+HttpError.methodNotAllowed = msg => new HttpError(HttpError.METHOD_NOT_ALLOWED, msg || 'Method not allowed');
+HttpError.notAcceptable = msg => new HttpError(HttpError.NOT_ACCEPTABLE, msg || 'Not acceptable');
+HttpError.tooManyRequests = msg => new HttpError(HttpError.TOO_MANY_REQUESTS, msg || 'Too many requests');
+HttpError.internalServerError = msg => new HttpError(HttpError.INTERNAL_SERVER_ERROR, msg || 'Internal server error');
 
 export default HttpError;
