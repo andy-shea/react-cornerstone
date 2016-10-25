@@ -10,10 +10,10 @@ yarn add react-cornerstone
 
 ## Tech Stack
 
-- **React** - UI library
-- **React Router** - Declarative routing
+- **React** - Component-based UI library
+- **React Router** - Declarative routing for React
 - **Redux** - State management and data flow
-- **Redux Connect** - Asynchronous data loading for components to support server-side rendering
+- **Redux Connect** - Universal, asynchronous data loading for components
 - **Express** - Server-side framework
 
 ## Usage
