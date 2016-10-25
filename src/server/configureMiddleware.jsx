@@ -6,7 +6,7 @@ import {syncHistoryWithStore} from 'react-router-redux';
 import {ReduxAsyncConnect, loadOnServer} from 'redux-connect';
 import HttpError from './HttpError';
 
-function load({configureStore, createRoutes, render, getInitialState, getHelpers}) {
+function configureMiddleware(configureStore, createRoutes, template, {getInitialState, getHelpers}) {
   return (req, res, next) => {
     const {url} = req;
     const memoryHistory = createMemoryHistory(url);
@@ -23,7 +23,7 @@ function load({configureStore, createRoutes, render, getInitialState, getHelpers
               <ReduxAsyncConnect {...renderProps}/>
             </Provider>
           );
-          res.send(render(html, store.getState()));
+          res.send(template(html, store.getState()));
         }).catch(next);
       }
       else next(HttpError.notFound());
@@ -31,4 +31,4 @@ function load({configureStore, createRoutes, render, getInitialState, getHelpers
   }
 }
 
-export default load;
+export default configureMiddleware;

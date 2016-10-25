@@ -5,7 +5,7 @@ import {ReduxAsyncConnect} from 'redux-connect';
 import {Router, browserHistory} from 'react-router';
 import {syncHistoryWithStore} from 'react-router-redux';
 
-function render({configureStore, createRoutes, mountTo}) {
+function render(configureStore, createRoutes, mountTo) {
   const store = configureStore(true, browserHistory, window.__INITIAL_STATE__);
   const history = syncHistoryWithStore(browserHistory, store);
 
