@@ -111,7 +111,7 @@ const configureStore = configureStoreCreator(reducers);
 The configured store will include a reducer and middleware from `react-router-redux` to keep
 react-router and redux in sync, along with a reducer from `redux-connect` to track asynchronous
 data loading. [Dev Tools Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
-support will also be included as `forClient` is set to `true`.
+support will also be included if `forClient` is `true`.
 
 **Note: if a custom middleware stack is not provided via the optional `middleware` parameter,
 [`redux-thunk`](https://github.com/gaearon/redux-thunk) is included by default to handle
