@@ -33,7 +33,7 @@ import {render} from 'react-cornerstone/client';
 const store = render(configureStore, createRoutes, document.getElementById('app'));
 ```
 
-`configureStore` are `createRoutes` are expected to be
+`configureStore` and `createRoutes` are expected to be
 [universal](https://medium.com/@mjackson/universal-javascript-4761051b7ae9) functions returning
 both the redux store and react routes, respectively. More information on these can be found
 under the [common section](#common) below.
@@ -42,7 +42,7 @@ under the [common section](#common) below.
 
 In your server entry point, call the `configureMiddleware` function from `react-cornerstone/server` passing in the
 same `configureStore` and `createRoutes` functions as used in the client configuration, a `template`
-function for displaying the HTML including the mount point DOM element, and, optionally and object
+function for displaying the HTML including the mount point DOM element, and, optionally an object
 with the following configuration functions:
 
 - `getInitialState(req)` - Receives the Express request object and should return the initial
@@ -54,7 +54,7 @@ with the following configuration functions:
   decorator.
 
 The server-side `configureMiddleware` function will return an Express middleware that uses react-route's `match`
-function to work out the active `<Route/>` and with the corresponding components, redux-connect's
+function to work out the active `<Route/>` and, with the corresponding components, redux-connect's
 `loadOnServer` is used to load any asynchronous data to initiate the redux store with.
 
 ```javascript
@@ -66,7 +66,7 @@ const middleware = configureMiddleware(configureStore, createRoutes, template, {
 The `template` function will be passed the output of `react-dom/server`'s `renderToString`
 as the first parameter and the initial state as second.  It is expected to at least return
 the page HTML including the mount point and the initial state javascript in a variable called
-`window.__INITIAL_STATE__` along with the client-side code bundle:
+`window.__INITIAL_STATE__` along with the client-side code bundle. For example:
 
 ```javascript
 function template(componentHtml, initialState) {
