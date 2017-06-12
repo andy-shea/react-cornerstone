@@ -23,14 +23,15 @@ yarn add react-cornerstone
 ####
 
 In your client entry point, call the `render` function from `react-cornerstone/client` passing in a
-function to `configureStore`, a function to `createRoutes`, and a DOM element designating the
-mount point of the app.  The created store will be returned if you need to use it further in your
+function to `configureStore`, a function to `createRoutes`, a DOM element designating the
+mount point of the app, and any helpers to be made available to the redux-connect [`asyncConnect`](https://github.com/makeomatic/redux-connect/blob/master/docs/API.MD#asyncconnect-decorator)
+decorator. The created store will be returned if you need to use it further in your
 client setup (for example, you may want your incoming web socket events to dispatch actions).
 
 ```javascript
 import {render} from 'react-cornerstone/client';
 
-const store = render(configureStore, createRoutes, document.getElementById('app'));
+const store = render(configureStore, createRoutes, document.getElementById('app'), helpers);
 ```
 
 `configureStore` and `createRoutes` are expected to be
