@@ -11,7 +11,7 @@ function configureMiddleware(configureStore, createRoutes, template, {getInitial
     const {url} = req;
     const memoryHistory = createMemoryHistory(url);
     const initialState = getInitialState ? getInitialState(req) : {};
-    const store = configureStore(false, memoryHistory, initialState);
+    const store = configureStore(false, memoryHistory, initialState, req);
     const history = syncHistoryWithStore(memoryHistory, store);
     match({history, routes: createRoutes(store), location: url}, (err, redirectLocation, renderProps) => {
       if (err) next(err);
