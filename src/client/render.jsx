@@ -1,23 +1,11 @@
 import React from 'react';
 import {render as renderToDom} from 'react-dom';
 import {Provider} from 'react-redux';
-import {ReduxAsyncConnect} from 'redux-connect';
-import {Router, browserHistory, applyRouterMiddleware} from 'react-router';
-import {syncHistoryWithStore} from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
 
-function render(configureStore, createRoutes, mountTo, {middleware, helpers}) {
-  const store = configureStore(true, browserHistory, window.__INITIAL_STATE__);
-  const history = syncHistoryWithStore(browserHistory, store);
-
-  renderToDom(
-    <Provider store={store}>
-      <Router history={history} routes={createRoutes(store)} render={props => (
-        <ReduxAsyncConnect helpers={helpers || {}} {...props} render={applyRouterMiddleware(...(middleware || []))}/>
-      )}/>
-    </Provider>,
-    mountTo
-  );
-
+function render(configureStore, createRoutesConfig, Component, mountTo, helpers = {}) {
+  const {store} = configureStore(true, createRoutesConfig(helpers), createHistory(), window.__INITIAL_STATE__);
+  renderToDom(<Provider store={store}><Component/></Provider>, mountTo);
   return store;
 }
 

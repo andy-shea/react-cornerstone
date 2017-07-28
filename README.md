@@ -11,9 +11,8 @@ yarn add react-cornerstone
 ## Tech Stack
 
 - **React** - Component-based UI library
-- **React Router** - Declarative routing for React
 - **Redux** - State management and data flow
-- **Redux Connect** - Universal, asynchronous data loading for components
+- **Redux-First Router** - Redux-oriented routing
 - **Express** - Server-side framework
 
 ## Usage
@@ -31,13 +30,16 @@ client setup (for example, you may want your incoming web socket events to dispa
 ```javascript
 import {render} from 'react-cornerstone/client';
 
-const store = render(configureStore, createRoutes, document.getElementById('app'), helpers);
+const store = render(configureStore, createRoutesConfig, Component, document.getElementById('app'), helpers)
 ```
 
-`configureStore` and `createRoutes` are expected to be
+`configureStore` and `createRoutesConfig` are expected to be
 [universal](https://medium.com/@mjackson/universal-javascript-4761051b7ae9) functions returning
-both the redux store and react routes, respectively. More information on these can be found
+both the redux store and the routes config, respectively. More information on these can be found
 under the [common section](#common) below.
+
+The `Component` is the main bootstrap/app component rendered which will need to, amongst other
+app-specific things, render the correct component when a new location is reduced.
 
 ### Server
 
@@ -61,7 +63,7 @@ function to work out the active `<Route/>` and, with the corresponding component
 ```javascript
 import {configureMiddleware} from 'react-cornerstone/server';
 
-const middleware = configureMiddleware(configureStore, createRoutes, template, {getInitialState, getHelpers});
+const middleware = configureMiddleware(configureStore, createRoutesConfig, Component, template, {getInitialState, getHelpers})
 ```
 
 The `template` function will be passed the output of `react-dom/server`'s `renderToString`
@@ -88,10 +90,13 @@ function template(componentHtml, initialState) {
 
 ### Common
 
-#### `configureStore(forClient, history, initialState)`
+#### `configureStore(forClient, {map, ...options}, history, initialState = {})`
 
 - `forClient` - a boolean to distinguish between client and server contexts. Obviously on the
   client-side this will be `true` and on the server, `false`.
+- `{map, [...options]}` - the route config to be passed to `redux-first-router`.  The `map`
+  will be the routes supplied to `connectRoutes` and any further properties will be passed along as
+  the `options` parameter (see [`connectRoutes` documentation](https://github.com/faceyspacey/redux-first-router/blob/master/docs/connectRoutes.md#options)).
 - `history` - the history strategy used by react-router. On the client-side this will be
   `browserHistory` and on the server, `memoryHistory`.
 - `initialState` - the initial state to seed the redux store with.  On the client-side this will

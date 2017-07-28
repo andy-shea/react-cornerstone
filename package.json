@@ -13,6 +13,7 @@
   "keywords": [
     "react",
     "redux",
+    "redux-first-router",
     "universal",
     "isomorphic",
     "starter",
@@ -26,22 +27,20 @@
     "prepublish": "[[ $(basename $PWD) = \"lib\" ]]"
   },
   "devDependencies": {
-    "babel-cli": "^6.16.0",
-    "babel-plugin-transform-export-extensions": "^6.8.0",
-    "babel-plugin-transform-object-rest-spread": "^6.16.0",
-    "babel-preset-es2015": "^6.16.0",
-    "babel-preset-react": "^6.16.0",
-    "rimraf": "^2.5.4"
+    "babel-cli": "^6.24.1",
+    "babel-plugin-transform-export-extensions": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "rimraf": "^2.6.1"
   },
   "dependencies": {
     "lodash.isplainobject": "^4.0.6",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
-    "react-router": "^2.8.1",
-    "react-router-redux": "^4.0.6",
-    "redux": "^3.6.0",
-    "redux-connect": "^5.1.0",
-    "redux-thunk": "^2.1.0"
+    "redux": "^3.7.2",
+    "redux-first-router": "next",
+    "redux-thunk": "^2.2.0"
   }
 }

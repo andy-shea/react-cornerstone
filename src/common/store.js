@@ -1,28 +1,22 @@
-import {createStore, combineReducers, compose, applyMiddleware} from 'redux';
-import {routerReducer, routerMiddleware} from 'react-router-redux';
-import {reducer as reduxAsyncConnect} from 'redux-connect';
+import {combineReducers, createStore, applyMiddleware, compose} from 'redux';
+import {connectRoutes} from 'redux-first-router';
 import thunkMiddleware from 'redux-thunk';
 
 function configureStoreCreator(reducers, middleware = () => [thunkMiddleware]) {
-  const reducer = combineReducers({
-    routing: routerReducer,
-    reduxAsyncConnect,
-    ...reducers
-  });
-
-  return (forClient, history, initialState = {}, req) => {
+  return (forClient, {map, ...routesConfig}, history, initialState = {}, req) => {
+    const {reducer, middleware: routerMiddleware, enhancer, thunk} = connectRoutes(history, map, routesConfig);
+    const rootReducer = combineReducers({location: reducer, ...reducers});
     const devToolsEnhancer = forClient && window.devToolsExtension ? window.devToolsExtension() : f => f;
-    return createStore(
-      reducer,
+    const store = createStore(
+      rootReducer,
       initialState,
       compose(
-        applyMiddleware(
-          ...middleware(req),
-          routerMiddleware(history)
-        ),
+        enhancer,
+        applyMiddleware(routerMiddleware, ...middleware(req)),
         devToolsEnhancer
       )
     );
+    return {store, thunk};
   };
 }
 
