@@ -23,7 +23,8 @@
   ],
   "scripts": {
     "prebuild": "rimraf lib",
-    "build": "babel src -d lib"
+    "build": "babel src -d lib",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -41,7 +42,7 @@
     "react-hot-loader": "next",
     "react-redux": "4.4.8",
     "redux": "^3.7.2",
-    "redux-first-router": "next",
+    "redux-first-router": "^1.9.10",
     "redux-thunk": "^2.2.0"
   }
 }

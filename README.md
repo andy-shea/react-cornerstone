@@ -10,27 +10,26 @@ yarn add react-cornerstone
 
 ## Tech Stack
 
-- **React** - Component-based UI library
-- **Redux** - State management and data flow
-- **Redux-First Router** - Redux-oriented routing
-- **Express** - Server-side framework
+- [**React**](https://github.com/facebook/react) - Component-based UI library
+- [**Redux**](https://github.com/reactjs/redux) - State management and data flow
+- [**Redux-First Router**](https://github.com/faceyspacey/redux-first-router) - Redux-oriented routing
+- [**Express**](https://github.com/expressjs/express) - Server-side framework
+- [**React Hot Loader**](https://github.com/gaearon/react-hot-loader) - Hot module replacement that works with react+redux
 
 ## Usage
 
 ### Client
 
-####
-
-In your client entry point, call the `render` function from `react-cornerstone/client` passing in a
+In your client entry point, call the `render` function from `react-cornerstone` passing in a
 function to `configureStore`, a function to `createRoutes`, a DOM element designating the
 mount point of the app, and any helpers to be made available to the redux-connect [`asyncConnect`](https://github.com/makeomatic/redux-connect/blob/master/docs/API.MD#asyncconnect-decorator)
 decorator. The created store will be returned if you need to use it further in your
 client setup (for example, you may want your incoming web socket events to dispatch actions).
 
 ```javascript
-import {render} from 'react-cornerstone/client';
+import {render} from 'react-cornerstone';
 
-const store = render(configureStore, createRoutesConfig, Component, document.getElementById('app'), helpers)
+const {store} = render(configureStore, createRoutesConfig, Component, document.getElementById('app'), helpers)
 ```
 
 `configureStore` and `createRoutesConfig` are expected to be
@@ -41,9 +40,21 @@ under the [common section](#common) below.
 The `Component` is the main bootstrap/app component rendered which will need to, amongst other
 app-specific things, render the correct component when a new location is reduced.
 
+#### Hot Module Replacement
+
+`render` also returns a function called `reload` which can be used to swap out the top level `Component` passed to it when the file has changed. See the [react-hot-loader docs](https://github.com/gaearon/react-hot-loader/tree/master/docs#migration-to-30) for more information on how to set this up correctly.
+
+```javascript
+import Component from './path/to/Component';
+
+const {reload} = render(configureStore, createRoutesConfig, Component, document.getElementById('app'))
+
+if (module.hot) module.hot.accept('./path/to/Component', reload);
+```
+
 ### Server
 
-In your server entry point, call the `configureMiddleware` function from `react-cornerstone/server` passing in the
+In your server entry point, call the `configureMiddleware` function from `react-cornerstone` passing in the
 same `configureStore` and `createRoutes` functions as used in the client configuration, a `template`
 function for displaying the HTML including the mount point DOM element, and, optionally an object
 with the following configuration functions:
@@ -61,7 +72,7 @@ function to work out the active `<Route/>` and, with the corresponding component
 `loadOnServer` is used to load any asynchronous data to initiate the redux store with.
 
 ```javascript
-import {configureMiddleware} from 'react-cornerstone/server';
+import {configureMiddleware} from 'react-cornerstone';
 
 const middleware = configureMiddleware(configureStore, createRoutesConfig, Component, template, {getInitialState, getHelpers})
 ```
@@ -105,11 +116,11 @@ function template(componentHtml, initialState) {
 
 It is expected to return the store created by a call to redux's `createStore`.
 An opinionated implementation can be created by using the `configureStoreCreator(reducers, [middleware])`
-function from `react-cornerstone/common`. Simply pass in your reducers and, optionally, an array of
+function from `react-cornerstone`. Simply pass in your reducers and, optionally, an array of
 middleware:
 
 ```javascript
-import {configureStoreCreator} from 'react-cornerstone/common';
+import {configureStoreCreator} from 'react-cornerstone';
 
 const configureStore = configureStoreCreator(reducers);
 ```
