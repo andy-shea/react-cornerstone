@@ -133,7 +133,7 @@ The return value should be the `<Route/>` configuration to be utilised by `react
 
 ## Useful Links
 
-- [Octopush](https://github.com/octahedron/octopush) - an app built upon React Cornerstone
+- [Octopush](https://github.com/andy-shea/octopush) - an app built upon React Cornerstone
 
 ## Licence
 

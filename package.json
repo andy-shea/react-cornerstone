@@ -4,7 +4,8 @@
   "author": "Andy Shea <aa.shea@gmail.com>",
   "version": "0.7.0",
   "license": "MIT",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "pure-module": true,
   "repository": {
     "type": "git",
     "url": "git://github.com/andy-shea/react-cornerstone"
@@ -22,9 +23,7 @@
   ],
   "scripts": {
     "prebuild": "rimraf lib",
-    "build": "babel src -d lib",
-    "postbuild": "cp {package.json,README.md,LICENSE} lib/",
-    "prepublish": "[[ $(basename $PWD) = \"lib\" ]]"
+    "build": "babel src -d lib"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -40,7 +39,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-hot-loader": "next",
-    "react-redux": "^5.0.5",
+    "react-redux": "4.4.8",
     "redux": "^3.7.2",
     "redux-first-router": "next",
     "redux-thunk": "^2.2.0"
