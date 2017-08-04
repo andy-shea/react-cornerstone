@@ -35,9 +35,11 @@
     "rimraf": "^2.6.1"
   },
   "dependencies": {
+    "history": "^4.6.3",
     "lodash.isplainobject": "^4.0.6",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-hot-loader": "next",
     "react-redux": "^5.0.5",
     "redux": "^3.7.2",
     "redux-first-router": "next",
