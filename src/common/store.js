@@ -3,8 +3,8 @@ import {connectRoutes} from 'redux-first-router';
 import thunkMiddleware from 'redux-thunk';
 
 function configureStoreCreator(reducers, middleware = () => [thunkMiddleware]) {
-  return (forClient, {map, ...routesConfig}, history, initialState = {}, req) => {
-    const {reducer, middleware: routerMiddleware, enhancer, thunk} = connectRoutes(history, map, routesConfig);
+  return (forClient, {map, ...routesConfig}, initialState = {}, req) => {
+    const {reducer, middleware: routerMiddleware, enhancer, thunk} = connectRoutes(map, routesConfig);
     const rootReducer = combineReducers({location: reducer, ...reducers});
     const devToolsEnhancer = forClient && window.devToolsExtension ? window.devToolsExtension() : f => f;
     const store = createStore(
